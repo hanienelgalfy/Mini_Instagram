@@ -4,18 +4,18 @@ import { StyleSheet, Text, View  , TouchableOpacity , FlatList, Image} from 'rea
 
 export default function Feed({navigation}) {
 
- 
+
 
 const FlatListHeader = () =>{
   return (
  <View style ={{flexDirection: 'row' , justifyContent: 'space-around' , flex: 1}}>
-    <TouchableOpacity onPress = {()=> navigation.navigate('BucketList')}>
+    <TouchableOpacity onPress = {()=> navigation.navigate('BucketList' , {bucketList : navigation.state.params.bucketList})}>
     <Text>Bucket List</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress = {()=> navigation.navigate('Profile' , {email: navigation.state.params.email})}>
+    <TouchableOpacity onPress = {()=> navigation.navigate('Profile' , {email: navigation.state.params.email , username: navigation.state.params.username , age: navigation.state.params.age})}>
     <Text>Profile</Text>
     </TouchableOpacity>
-    <TouchableOpacity>
+    <TouchableOpacity onPress = {()=> navigation.navigate('Post' , {bucketList: navigation.state.params.bucketList })}>
     <Text>Add post</Text>
     </TouchableOpacity>
     </View>

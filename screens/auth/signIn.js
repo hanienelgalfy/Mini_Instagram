@@ -10,8 +10,10 @@ export default function SignIn({navigation}) {
   const [users, setUsers] = useState([]);
   const [check , setCheck] = useState(false); 
   const [email , setEmail] = useState("");
+  const[username , setUsername] = useState("");
+  const[age , setAge] = useState("");
   const [feedsArray , setFeeds] = useState([]);
-
+const [bucketList , setBucketList] = useState([]);
   const getDataUsingGet = () => {
     fetch('http://localhost:3000/user', {
       method: 'GET',
@@ -45,6 +47,9 @@ useEffect(() => {
         if(user.email === text.toLowerCase()){
           setEmail(user.email);
           setFeeds(user.feed);
+          setUsername(user.username);
+          setAge(user.age);
+          setBucketList(user.bucketList);
           setCheck(true);
         }
       }
@@ -65,7 +70,7 @@ useEffect(() => {
     />
 
     <TouchableOpacity style={{backgroundColor:'pink', padding : 10, marginTop:50}} onPress = {()=> {if (check ===true) {
-  navigation.navigate("Feed" , {email : email , feedsArray: feedsArray});
+  navigation.navigate("Feed" , {email : email , feedsArray: feedsArray , bucketList: bucketList , age: age , username: username});
     }else{
       Alert.alert(
       "Oops",

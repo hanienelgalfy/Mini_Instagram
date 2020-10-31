@@ -3,12 +3,8 @@ import React , {useState} from 'react';
 import { StyleSheet, Text, View , FlatList, TextInput} from 'react-native';
 
 
-export default function BucketList() {
-    const [places, setPlaces] = useState([
-  "Cairo",
-  "Australia",
-  "Canada",
-    ]);
+export default function BucketList({navigation}) {
+   
     const [text, setText] = useState("");
    const  handleKeyDown = (e) =>  {
     if(e.nativeEvent.key == "Enter"){
@@ -22,7 +18,7 @@ export default function BucketList() {
           borderColor:'gray',width:300,
           height:30,}}  defaultValue={text} onKeyPress={handleKeyDown} />)}
    showsVerticalScrollIndicator={false}
-    data={places}
+    data={navigation.state.params.bucketList}
     renderItem={ ({ item, index }) => (
       <Text 
       style={{

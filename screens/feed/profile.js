@@ -10,6 +10,10 @@ export default function Profile({navigation}) {
         source={require('../../assets/dummyUser.jpg')}
       />
       <Text style={{marginLeft: 10}}>{navigation.state.params.email}</Text>
+      <Text style={{marginLeft: 10}}>{navigation.state.params.username}
+      </Text >
+       <Text style={{marginLeft: 10}}>{navigation.state.params.age}
+      </Text>
     </View>
   );
 }
