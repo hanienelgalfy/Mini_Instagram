@@ -2,25 +2,28 @@ import { StatusBar } from 'expo-status-bar';
 import React , {useState, useEffect} from 'react';
 import { StyleSheet, Text, View , Image , TextInput, TouchableOpacity , Alert} from 'react-native';
 
-export default function SignIn() {
+
+export default function SignIn({navigation}) {
+
 
   const [loadUser, setLoadUser] = useState(false);
   const [users, setUsers] = useState([]);
   const [check , setCheck] = useState(false); 
+  const [email , setEmail] = useState("");
+  const [feedsArray , setFeeds] = useState([]);
+
   const getDataUsingGet = () => {
-    
     fetch('http://localhost:3000/user', {
       method: 'GET',
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        alert(JSON.stringify(responseJson));
         setUsers(responseJson);
+        console.log("FEEDS" + feedsArray);
         setLoadUser(true);
         console.log(responseJson);
       })
       .catch((error) => {
-        alert(JSON.stringify(error));
         console.error(error);
       });
   };
@@ -39,30 +42,30 @@ useEffect(() => {
        <TextInput
       style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1 , marginBottom: 10 , paddingLeft: 10}}
       onChangeText= {text=> users.map((user)=> {
-        if(user.email === text){
+        if(user.email === text.toLowerCase()){
+          setEmail(user.email);
+          setFeeds(user.feed);
           setCheck(true);
-        }else {
-          setCheck(false);
         }
-      })}
+      }
+
+      )}
       placeholder= 'email'
     />
       <TextInput
       style={{ height: 40, width: 200,borderColor: 'gray', borderWidth: 1 , paddingLeft: 10}}
       onChangeText= {text=> users.map((user)=> {
         if(user.password === text){
-          setCheck(true);
+          setCheck(true); 
         }
-        else{
-          setCheck(false);
-        }
-      })}
+      }
+      )}
       secureTextEntry = {true}
       placeholder= 'password'
     />
 
     <TouchableOpacity style={{backgroundColor:'pink', padding : 10, marginTop:50}} onPress = {()=> {if (check ===true) {
-      navigation.navigate('Feed')
+  navigation.navigate("Feed" , {email : email , feedsArray: feedsArray});
     }else{
       Alert.alert(
       "Oops",
@@ -89,6 +92,7 @@ useEffect(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
