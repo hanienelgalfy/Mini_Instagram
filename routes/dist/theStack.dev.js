@@ -26,7 +26,13 @@ var screens = {
     screen: _signIn["default"]
   },
   Feed: {
-    screen: _feed["default"]
+    screen: _feed["default"],
+    navigationOptions: function navigationOptions(_ref) {
+      var navigation = _ref.navigation;
+      return {
+        headerLeft: null
+      };
+    }
   },
   BucketList: {
     screen: _bucketList["default"]

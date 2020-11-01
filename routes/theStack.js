@@ -9,9 +9,15 @@ import Post from '../screens/feed/post';
 const screens = {
     SignIn: {
         screen: SignIn
+        
     },
     Feed : {
-        screen: Feed
+        screen: Feed,
+        navigationOptions: ({ navigation }) => {
+        return {
+          headerLeft: null,
+        }
+      },
     },
     BucketList:{
         screen: BucketList
